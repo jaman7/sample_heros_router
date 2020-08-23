@@ -1,0 +1,141 @@
+%menutextshadow {
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
+}
+
+%nav-item-line-a-b-state {
+	&::before {
+		position: absolute;
+		bottom: -1px;
+		left: 0;
+		width: 0%;
+		height: 1px;
+		background: $menuunderline;
+		content: "";
+	}
+
+	&::after {
+		position: absolute;
+		right: 0;
+		bottom: -1px;
+		width: 0%;
+		height: 1px;
+		background: $menuunderline;
+		content: "";
+		transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+	}
+}
+
+%nav-item-line-hover-active-state {
+	color: $textcolor;
+
+	&::before {
+		width: 100%;
+		background: $menuunderline;
+		transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+	}
+
+	&::after {
+		width: 100%;
+		background: transparent;
+		transition: 0s;
+	}
+}
+
+.navbar {
+	z-index: 1030;
+	border-width: 0;
+	background-color: $bgcolor;
+	box-shadow: 0 0 7px 0 rgba($text2color, 0.3);
+	font-weight: 400;
+	font-size: 1.2rem;
+	font-family: $fontm;
+	transition: background 0.5s ease-in-out, padding 0.4s ease-in-out;
+
+	@include mediaa(maxsm) {
+		@include padding(0.25rem null);
+	}
+
+	& .navbar-brand {
+		display: flex;
+		@include margin(0);
+
+		& .main-brand {
+			display: block;
+			max-height: 70px;
+
+			@include mediaa(maxsm) {
+				max-height: 50px;
+			}
+		}
+
+		&:hover {
+			opacity: 0.8;
+		}
+	}
+
+	& .title-brand {
+		display: flex;
+		align-self: center;
+		flex-direction: column;
+		margin-bottom: 0;
+		margin-left: 10px;
+		color: $textcolor;
+		font-weight: 700;
+		@extend %menutextshadow;
+
+		@include mediaa(maxsm) {
+			text-shadow: none;
+			font-weight: 600;
+		}
+
+		& .title-brand-big {
+			@include fluid-type(20px, 26px);
+		}
+
+		& .title-brand-small {
+			margin-bottom: 0;
+			@include fluid-type(13px, 18px);
+		}
+	}
+
+	& .navbar-collapse {
+		background-color: transparent;
+		transition: height 0.4s ease-in-out;
+
+		@include mediaa(maxsm) {
+			border-top-width: 1px;
+			border-top-style: solid;
+			border-bottom-color: $fontColor;
+			@include padding(0.5rem null);
+		}
+	}
+}
+
+.navbar-nav {
+	color: $textcolor;
+
+	& .nav-link {
+		position: relative;
+		color: $textcolor;
+		font-weight: 500;
+		@include fluid-type(15px, 16px);
+
+		@extend %nav-item-line-a-b-state;
+
+		&:hover {
+			@extend %nav-item-line-hover-active-state;
+		}
+	}
+
+	& .nav-item.active {
+		& .nav-link {
+			opacity: 1;
+			@extend %nav-item-line-hover-active-state;
+
+			@include mediaa(maxsm) {
+				// color: $fontColor;
+				text-shadow: none;
+			}
+		}
+	}
+}
