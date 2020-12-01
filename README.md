@@ -2,6 +2,8 @@
 
 Sample Heros React/Mobx/React Router app.
 
+Demo: https://jsdevpro.pl/herosrouter/
+
 ## Installation:
 
 ## Use git clone.
